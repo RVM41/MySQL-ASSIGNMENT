@@ -68,11 +68,11 @@ select* from persons;
      SET Age=TIMESTAMPDIFF(YEAR ,DOB,CURDATE());
      RETURN AGE;
 END $$
-DELIMITER $$
-
+DELIMITER ;
+DROP FUNCTION CALCULATEAGE;
 
 -- 3. Write a select query to fetch the Age of all persons using the function that has been created. 
-SELECT ID,FNAME,LNAME,COUNTRY_NAME,DOB,CALCULATEAGE(DOB) as AGE from persons;
+SELECT ID,FNAME,LNAME,COUNTRY_NAME,DOB,CALCULATEAGE(DOB) as AGE from persons ;
 
  -- 4. Find the length of each country name in the Country table.
 SELECT COUNTRY_NAME ,LENGTH(COUNTRY_NAME)AS NAME_LENGTH FROM COUNTRY;
