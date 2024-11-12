@@ -47,9 +47,9 @@ select country.*,persons.*
 from country Right join persons on country.Id=persons.Id; 
 
 -- (2)List all distinct country names from both the Country and Persons tables. 
-select country_name from country
+select DISTINCT country_name from country
 union
-select country_name from persons;
+select DISTINCT country_name from persons;
 
  -- (3)List all country names from both the Country and Persons tables, including duplicates.
 select country_name from country
