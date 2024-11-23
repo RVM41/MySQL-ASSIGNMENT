@@ -20,6 +20,7 @@ values(1,'Soosan','Maths',10,53000),(2,'Praveen','Physics',8,50000),
 (5,'Manoj Kumar','Biology',11,53000),(6,'Parvathi Krisna','Chemistry',08,50000),
 (7,'Lthika','Geography',14,55000),(8,'Gopan','English',09,50000) ;
 
+select * from teachers;
 --  2. Create a before insert trigger named before_insert_teacher that will raise an error “salary cannot be negative”
 --  if the salary inserted to the table is less than zero.  
 DELIMITER $$
@@ -32,24 +33,27 @@ BEGIN
     END IF;
 END $$
 DELIMITER ;
+insert into teachers(ID,Name,subject,experience,salary)values(18,'David','sports',5,-25000);
 DROP  TRIGGER  before_insert_Teacher ;
 -- 3. Create an after insert trigger named after_insert_teacher that inserts a row with teacher_id,action
-DELIMITER $$
+
 CREATE TABLE teacher_log (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
     teacher_id INT,
     action VARCHAR(50),
     timestamp DATETIME
 );
-
+DELIMITER $$
 CREATE TRIGGER after_insert_teacher
 AFTER INSERT ON teachers
 FOR EACH ROW
 BEGIN
     INSERT INTO teacher_log (teacher_id, action, timestamp)
     VALUES (NEW.id, 'insert', NOW());
-END;
+END $$
 DELIMITER ;
+insert into teachers(ID,Name,subject,experience,salary)values(11,'David','sports',5,25000);
+SELECT * FROM TEACHER_LOG;
 
 -- 4. Create a before delete trigger that will raise an error when you try to delete a row that has experience
 -- greater than 10 years.
@@ -63,6 +67,8 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+DELETE from Teachers where experience=14;
+set sql_safe_updates=0;
 
 -- 5. Create an after delete trigger that will insert a row to teacher_log table when that row is deleted from teacher table.
 Use product; 
@@ -75,7 +81,8 @@ BEGIN
     VALUES (OLD.id, 'delete', NOW());
 END $$
 
-
+DELETE from Teachers where experience=8;
+SELECT * FROM TEACHER_LOG;
 
 
 
