@@ -8,6 +8,7 @@
  -- (7)Find all persons from the countries 'USA', 'Canada', and 'UK'.
  -- (8)Find all persons not from the countries 'India' and 'Australia'. 
  -- (9)Find all countries with a population between 5 lakhs and 20 lakhs.
+ -- (10)Find all countries whose names do not start with 'C'.
 use entry_d41;
  create table Country (Id int auto_increment primary key,Country_Name Varchar (30),Population int,Area varchar(30)) ;
 create table Persons (id int auto_increment primary key,Fname varchar (30),Lname varchar(30),Population int,
@@ -61,6 +62,10 @@ select id ,Fname from persons where  Country_Name not in ('india','australia');
 -- (9)Find all countries with a population between 5 lakhs and 20 lakhs.
 select Country_Name from persons where Population between 500000 and 2000000;
 
-##Thank You##
+-- (10)Find all countries whose names do not start with 'C'. -- no names start whith 'c'in persons table,
+--  I changed first spell of fname column starts with 'M' 
+select * from persons where fname not like 'm%' ;
 
+##Thank You##
+drop table country , persons;
 
